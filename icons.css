@@ -1,0 +1,188 @@
+/* управление стилями */
+
+:root {
+    /* ширина блока иконок для разных устройств */
+    /* * применяется в зависимости от ширины */
+    --resolution-desctop: 1260px;
+    --resolution-tablet: 960px;
+    --resolution-mobile: 100%;
+
+    /* параметры контейнера иконки для 2 строк: 112х84 */
+    /* параметры контейнера иконки для 3 строк: 132х99 */
+    /* ! устанавливается здесь */
+    --x-icon-container-width: 132px;
+    --x-icon-container-height: 99px;
+
+    /* размер шторки для десктопа: 80 */
+    /* размер шторки для устройства: 40 */
+    /* * применяется в зависимости от ширины */
+    --x-shadow-width: 80px;
+
+    /* отступы в блоке иконок для десктопа 16 */
+    /* отступы в блоке иконок для мобильного 10 */
+    /* * применяется в зависимости от ширины */
+    --x-gap: 16px;
+
+    /* body {padding-top: 162px;} */
+    /* отступ после хедера для 2-строчных иконок на десктопе 76 */
+    /* отступ после хедера для 2-строчных иконок на мобиле 64 */
+    /* отступ после хедера для 3-строчных иконок на десктопе 91 */
+    /* отступ после хедера для 3-строчных иконок на мобиле 64 */
+    /* ! устанавливается здесь + в адаптиве для устройства */
+    --x-margin: 91px;
+
+    /* высота хедера для 2-строчных иконок на десктопе 197 */
+    /* высота хедера для 2-строчных иконок на устройстве 185 */
+    /* высота хедера для 3-строчных иконок на десктопе 212 */
+    /* высота хедера для 3-строчных иконок на устройстве 200 */
+    /* ! устанавливается здесь */
+    /* * но это спорный параметр, можно его сделать 0 */
+    --x-header-height: 0px;
+
+    /* высота переключателя вида меню для 2-строчных иконок 378 */
+    /* высота переключателя вида меню для 3-строчных иконок 393 */
+    /* ! устанваливается здесь, необходимость только для десктопа */
+    --x-switch-top: 393px;
+    
+    /* размер иконок */
+    --x-icon-size: 24px;
+}
+
+/* * правки оригинальных стилей для адекватной работы нового блока */
+
+#header {
+    height: var(--x-header-height);
+}
+
+.node {
+    margin-top: var(--x-margin);
+}
+
+#header-visual {
+    margin-top: var(--x-margin);
+}
+
+#side-menu-switch {
+    top: var(--x-switch-top);
+}
+
+/* основные стили для блока иконок */
+
+.block-icons {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    /* * защита от выделения */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    /* * запрет вертикального скрола при касании */
+    touch-action: pan-y;
+    -ms-touch-action: pan-y;
+}
+
+.block-icons__container {
+    /* border: 1px solid gray; */
+    position: relative;
+    width: var(--resolution-desctop);
+    height: var(--x-icon-container-height);
+    margin-top: var(--x-gap);
+    margin-bottom: var(--x-gap);
+    /* * скрытие полосы прокрутки */
+    overflow: hidden;
+}
+
+.block-icons__shadow-left {
+    /* background-color: magenta; */
+    display: none;
+    position: absolute;
+    background: linear-gradient(90deg, rgba(255, 255, 255), transparent);
+    width: var(--x-shadow-width);
+    height: var(--x-icon-container-height);
+    top: 0;
+    left: 0;
+}
+
+.block-icons__shadow-right {
+    /* background-color: magenta; */
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255));
+    width: var(--x-shadow-width);
+    height: var(--x-icon-container-height);
+    top: 0;
+    right: 0;
+}
+
+.block-icons__list {
+    /* border: 1px solid blue; */
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    /* * скрытие полосы прокрутки */
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+}
+
+.block-icons__item {
+    /* border: 1px solid coral; */
+    text-decoration: none;
+}
+
+/* *установка отступов для всех, кроме последнего */
+.block-icons__item:not(:nth-last-child(2)) {
+    margin-right: var(--x-gap);
+}
+
+.block-icons__item-container {
+    box-sizing: border-box;
+    border: 1px solid #D9D5D5;
+    width: var(--x-icon-container-width);
+    height: var(--x-icon-container-height);
+    padding: 10px 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.block-icons__icon {
+    /* border: 1px solid brown; */
+    width: var(--x-icon-size);
+    height: var(--x-icon-size);
+}
+
+.block-icons__text {
+    /* border: 1px solid coral; */
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bolder;
+    color: #424242;
+    line-height: 15px;
+    margin-top: 10px;
+}
+
+/* * адаптив для блока иконок */
+
+@media (max-width: 1299px) {
+    .block-icons__container {
+        width: var(--resolution-tablet);
+    }
+}
+
+@media (max-width: 991px) {
+    .block-icons__container {
+        width: var(--resolution-mobile);
+    }
+    .block-icons {
+        padding-left: var(--x-gap);
+        padding-right: var(--x-gap);
+    }
+    :root {
+        --x-gap: 10px;
+        --x-margin: 64px;
+        --x-shadow-width: 40px;
+        --x-switch-top: 0px;
+    }
+}
